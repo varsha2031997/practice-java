@@ -13,8 +13,8 @@ public class Largestarray {
 
     }
 }
-//sum of array without using array_sum
-//count of consonants and vowels in string
+
+
 //arrange array in ascending and descending order
 //switch value b/w a and b
 //exchange key and value
