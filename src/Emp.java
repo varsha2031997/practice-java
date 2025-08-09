@@ -1,60 +1,55 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 //Sort Employees by Salary Descending (Comparator)
 //
 //Class: Employee (id, name, salary)
 //
 //Task: Sort by salary in descending order using Comparator.
-public class Emp
-{
-    int id;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Example {
+    String empId;
+
     String name;
     double salary;
 
-    Emp(int id, String name,double salary)
+
+    Example(String empId,String name,double salary)
     {
-       this.id=id;
-       this.name=name;
-       this.salary= salary;
+        this.empId=empId;
+        this.name=name;
+        this.salary=salary;
     }
 
     @Override
     public String toString() {
-        return "Emp{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "Example{" +
+                "empId='" + empId + '\'' +
+                ", name=" + name +
                 ", salary=" + salary +
                 '}';
     }
 
-
-
-
     public static void main(String[] args) {
-        List<Emp> emp = new ArrayList<>();
-        emp.add(new Emp(1234,"varsha",10000));
-        emp.add(new Emp(1234,"Sanrtosh",20000));
-        emp.add(new Emp(1234,"gia",30000));
-        emp.add(new Emp(1234,"owl",40000));
 
-        Comparator<Emp> empComparator = new Comparator<Emp>() {
-            @Override
-            public int compare(Emp o1, Emp o2) {
-               return Double.compare(o2.salary,o1.salary);
-            }
-        };
+        ArrayList<Example> emp = new ArrayList<>();
+        emp.add(new Example("Emp123","shwetha thiwari",20000));
+        emp.add(new Example("Emp222","kiran",50000));
+        emp.add(new Example("Emp234","Arjun",40000));
+        emp.add(new Example("Emp212","Varsha",55000));
+        emp.add(new Example("Emp244","Kapil",10000));
 
-        Collections.sort(emp,empComparator);
+        Comparator<Example> titleCompare = (o1,o2)->(Double.compare(o2.salary,o1.salary));
 
-        for(Emp emps : emp)
-        {
-            System.out.println(emps);
-        }
+        Collections.sort(emp,titleCompare);
 
-
+       for(Example Emps:emp)
+       {
+           System.out.println(Emps);
+       }
 
     }
 }
