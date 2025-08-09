@@ -1,53 +1,55 @@
-//Class: Book (title, author)
-//
-//Use case-insensitive comparison for title.
+////Class: Book (title, author)
+////
+////Use case-insensitive comparison for title.
+import com.sun.source.tree.BreakTree;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
-public class Book {
-
-
-    String tittle;
+//Sort Bank Transactions by Amount and Date
+//
+//Class: Transaction (txnId, amount, txnDate)
+//
+//Sort: higher amount first; if equal, most recent txn first.
+public class Example {
+    String title;
     String author;
 
-    Book(String title, String author)
+
+    Example(String title,String author)
     {
-        this.tittle = title;
-        this.author = author;
+        this.title=title;
+        this.author=author;
     }
 
     @Override
     public String toString() {
-        return "Book{" +
-                "tittle='" + tittle + '\'' +
-                ", author='" + author + '\'' +
+        return "Example{" +
+                "title='" + title + '\'' +
+                ", author=" + author +
                 '}';
     }
+
     public static void main(String[] args) {
-        List<Book> books = new ArrayList<>();
-        books.add(new Book("I too had love story","Preethi shenoy"));
-        books.add(new Book("Mere mast magan","Sandeep shenoy"));
-        books.add(new Book("Kaira","kashil shenoy"));
-        books.add(new Book("Crazy place","Atharv shenoy"));
 
-        Comparator<Book> booksComparator = new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                return o1.tittle.compareToIgnoreCase(o2.tittle);
-            }
-        };
+        ArrayList<Example> book = new ArrayList<>();
+        book.add(new Example("I too had love story","shwetha thiwari"));
+        book.add(new Example("Korean diaries","kiran"));
+        book.add(new Example("Mangalore days","Arjun"));
+        book.add(new Example("kerala stories","Varsha"));
+        book.add(new Example("King and queen","Kapil"));
 
-        Collections.sort(books,booksComparator);
+        Comparator<Example> titleCompare = (o1,o2)->(o1.title.compareToIgnoreCase(o2.title));
 
-        for(Book bookie : books)
-        {
-            System.out.println(bookie);
-        }
+        Collections.sort(book,titleCompare);
 
-
-
+       for(Example books:book)
+       {
+           System.out.println(books);
+       }
 
     }
 }
