@@ -32,20 +32,16 @@ public class Example {
         bank.add(new Example("txnId127", 1000, LocalDate.of(2025, 7, 20)));
         bank.add(new Example("txnId129", 1000, LocalDate.of(2025, 7, 31)));
 
-        // Modern Java 8+ comparator: higher amount first, then most recent date first
-        Comparator<Example> amtDateCompare =
-                Comparator.comparingDouble((Example e) -> e.amount).reversed()
-                          .thenComparing(Example::getDate, Comparator.reverseOrder());
+        // Comparator: higher amount first, then most recent date first
+        Comparator<Example> amtDateCompare = (o1, o2) ->
+                Double.compare(o2.amount, o1.amount) != 0
+                        ? Double.compare(o2.amount, o1.amount)  // Higher amount first
+                        : o2.date.compareTo(o1.date);           // If equal, most recent date first
 
         Collections.sort(bank, amtDateCompare);
 
         for (Example banks : bank) {
             System.out.println(banks);
         }
-    }
-
-    // Getter for date (needed for method reference)
-    public LocalDate getDate() {
-        return date;
     }
 }
