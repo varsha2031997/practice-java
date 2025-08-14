@@ -1,22 +1,27 @@
+import java.util.Scanner;
+
 public class Largestarray {
     public static void main(String[] args) {
-        int[] num = {1,2,3,4,5};
-        int largestnumber=num[0];
-        for(int i=0;i<=num.length-1;i++)
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the size of array");
+        int size = sc.nextInt();
+        int [] a = new int[size];
+        System.out.println("Enter the value of array");
+        for(int i=0;i<size;i++)
         {
-             if(num[i]>num[0])
-             {
-                 largestnumber =num[i];
-             }
+            a[i] =sc.nextInt();
         }
-        System.out.println("Largest number is:"+largestnumber);
+
+
+        int bigNumb = 0;
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]>bigNumb)
+            {
+                bigNumb = a[i];
+            }
+        }
+        System.out.println("Big number:"+bigNumb);
 
     }
 }
-
-
-//arrange array in ascending and descending order
-//switch value b/w a and b
-//exchange key and value
-//pattern programmes
-//sql queries
