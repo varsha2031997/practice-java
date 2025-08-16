@@ -1,23 +1,30 @@
-public class Vowelscount {
-    public static void main(String[] args) {
-          String str = "jhsdvgsvia";
-          int vowelscount=0;
-          int consonantcount=0;
-        for(int i=0;i<=str.length()-1;i++)
-        {
-            char ch=str.charAt(i);
+import java.util.Scanner;
 
-            if("aeiouAEIOUU".indexOf(ch)!=-1)
+public class StringVowels {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter String");
+        String str = sc.nextLine();
+        int vowelsCount=0;int consonantCount = 0;
+
+        for(int i=0;i<str.length();i++)
+        {
+            char ch = str.charAt(i);
+            if(Character.isLetter(ch))
             {
-                 vowelscount++;
-            }else {
-                consonantcount++;
+                if("aeiouAEIOU".contains(String.valueOf(ch)))
+                {
+                    vowelsCount++;
+                }else {
+                    consonantCount++;
+                }
+
             }
 
+
         }
-        System.out.println("Vowels count :"+vowelscount+"Consonant count :"+consonantcount);
 
-
+        System.out.println("Vowels count :"+vowelsCount+"Consonant count : "+consonantCount);
 
     }
 }
