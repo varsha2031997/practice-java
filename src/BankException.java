@@ -1,9 +1,9 @@
 import javax.sound.midi.Soundbank;
 import java.util.Scanner;
 
-class InsufficentBalance extends Exception
+class InsuffientBalance extends Exception
 {
-    InsufficentBalance(String message)
+    InsuffientBalance(String message)
     {
         super(message);
     }
@@ -15,62 +15,72 @@ class WrongPin extends Exception
         super(message);
     }
 }
+
 class Bank
 {
-    double amount;
+    int pin;
     double balance;
 
-    int pin;
-
-    Bank(double balance,int pin)
+    Bank(int pin,double balance)
     {
-        this.balance= balance;
         this.pin=pin;
+        this.balance=balance;
     }
 
-    public  void withdrawl(int enteredPin,double amount) throws WrongPin,InsufficentBalance
+    public void withdraw(int Enteredpin,double amount) throws InsuffientBalance,WrongPin
     {
-        if(enteredPin != pin)
+        if(Enteredpin != pin)
         {
-            throw  new WrongPin("You Entered wrong pin please check");
+            throw new WrongPin("Entered pin is wrong");
         }
-        if(amount>balance)
+        if(balance<amount)
         {
-            throw new InsufficentBalance("Insufficient balance");
+           throw  new InsuffientBalance("Entered amount is greater than balance");
         }
         balance-=amount;
-        System.out.println("balance :"+balance);
+        System.out.println("Balance is"+balance);
     }
-    public void deposit(int enteredPin,double amount) throws WrongPin
+
+    public void deposit(int Enteredpin, double amount) throws WrongPin
     {
-        if(enteredPin != pin)
+        if(Enteredpin!=pin)
         {
-            throw  new WrongPin("You Entered wrong pin please check");
+            throw  new WrongPin("Entered pin is wrong");
         }
-        balance +=amount;
-        System.out.println("Balance is :"+balance);
+        balance+=amount;
+        System.out.println("Balance is"+balance);
+
     }
 }
 
-public class BankException {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Bank bank = new Bank(2000,1234);
-        try
-        {
-            System.out.print("Enter pin :");
-            int pin = sc.nextInt();
-            System.out.print("Enter amount :");
-            double amt = sc.nextDouble();
-            bank.withdrawl(pin,amt);
 
-            System.out.print("Enter amount for Deposit :");
-            double deposit = sc.nextDouble();
-            bank.deposit(pin,deposit);
-        }catch (WrongPin | InsufficentBalance e)
+
+public class pract {
+    public static void main(String[] args)  {
+        Scanner sc = new Scanner(System.in);
+        Bank bank = new Bank(1234,30000);
+        System.out.println("Enter amount");
+        double amount = sc.nextDouble();
+        System.out.println("Enter pin");
+        Integer pin = sc.nextInt();
+        System.out.println("Enter choice");
+        Integer choice = sc.nextInt();
+        try {
+            if(choice == 1)
+            {
+               bank.withdraw(pin,amount);
+            }else if(choice == 2)
+            {
+                bank.deposit(pin,amount);
+            }else {
+                System.out.println("Invalid choice");
+            }
+
+        }catch (InsuffientBalance | WrongPin e)
         {
-            System.out.println("Exception :"+e.getMessage());
+            System.out.println("Exception e"+e.getMessage());
         }
+
 
     }
 }
